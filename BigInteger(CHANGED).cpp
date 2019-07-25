@@ -1,4 +1,8 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<string>
+#include<vector>
 
 struct BigInteger {
     static const int BASE = 100000000;
