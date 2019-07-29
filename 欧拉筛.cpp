@@ -9,7 +9,7 @@ void makePrime() {
     for (int i = 2; i <= MAXN; i++) {
         if (f[i]) prime[num++] = i;
         for (int j = 0; j < num && i*prime[j] < MAXN; j++) {
-            f[i*prime[j]] =false;
+            f[i*prime[j]] = false;
             if (!(i%prime[j])) break;
         }
     }
