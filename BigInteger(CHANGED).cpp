@@ -4,15 +4,17 @@
 #include<string>
 #include<vector>
 
+using namespace std;
+
 struct BigInteger {
     static const int BASE = 100000000;
     static const int WIDTH = 8;
     bool sign;
     size_t length;
-    std::vector<int> num;
+    vector<int> num;
 
     BigInteger(long long x = 0) {*this = x;}
-    BigInteger(const std::string &x) {*this = x;}
+    BigInteger(const string &x) {*this = x;}
     BigInteger(const BigInteger &x) {*this = x;}
 
     void cutLeadingZero() {
@@ -47,13 +49,13 @@ struct BigInteger {
         return *this;
     }
 
-    BigInteger &operator=(const std::string &str) {
+    BigInteger &operator=(const string &str) {
         num.clear();
         sign = (str[0] != '-');
         int x, len = (str.size() - 1 - (!sign)) / WIDTH + 1;
         for (int i = 0; i < len; i++) {
             int End = str.length() - i * WIDTH;
-            int start = std::max((int) (!sign), End - WIDTH);
+            int start = max((int) (!sign), End - WIDTH);
             sscanf(str.substr(start, End - start).c_str(), "%d", &x);
             num.push_back(x);
         }
@@ -136,7 +138,7 @@ struct BigInteger {
 
     BigInteger operator * (const BigInteger &b) const {
         int lena = num.size(), lenb = b.num.size();
-        std::vector<long long> ansLL;
+        vector<long long> ansLL;
         for (int i = 0; i < lena + lenb; i++) ansLL.push_back(0);
         for (int i = 0; i < lena; i++) {
             for (int j = 0; j < lenb; j++) {
@@ -238,7 +240,7 @@ struct BigInteger {
     bool operator && (const BigInteger &b) const { return *this != 0 && b != 0;}
     bool operator !() { return (bool) (*this == 0);}                           
 
-    friend std::ostream &operator << (std::ostream &out, const BigInteger &x) {
+    friend ostream &operator << (ostream &out, const BigInteger &x) {
         if (!x.sign) out << '-';
         out << x.num.back();
         for (int i = x.num.size() - 2; i >= 0; i--) {
@@ -249,8 +251,8 @@ struct BigInteger {
         return out;
     }
 
-    friend std::istream &operator >> (std::istream &in, BigInteger &x) {
-        std::string str;
+    friend istream &operator >> (istream &in, BigInteger &x) {
+        string str;
         in >> str;
         size_t len = str.size();
         int start = 0;
